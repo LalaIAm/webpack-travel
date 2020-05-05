@@ -1,60 +1,130 @@
 <!DOCTYPE html>
-<html lang='en'>
-<head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Journey Journal</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Amiko&family=Euphoria+Script&family=Neuton:ital,wght@0,400;0,700;1,400&display=swap"
-        rel="stylesheet" />
-        <script src="https://kit.fontawesome.com/9da35d0137.js" crossorigin="anonymous"></script>
-</head>
-<body>
+      href="https://fonts.googleapis.com/css2?family=Amiko&family=Euphoria+Script&family=Neuton:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/9da35d0137.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
     <!--Start Nav/Sidebar -->
-    <header class='nav-bar'>
-        <input type='checkbox' class='checkbox' id='click' hidden>
-        <div class='sidebar'>
-            <label for='click'>
-                <i id='menu-icon' class='far fa-compass fa-2x'></i>
-            </label>
-            <div class='year'>
-                <p>2020</p>
-            </div>
+    <header class="nav-bar">
+      <input type="checkbox" class="checkbox" id="click" hidden />
+      <div class="sidebar">
+        <label for="click">
+          <i id="menu-icon" class="far fa-compass fa-2x"></i>
+        </label>
+        <div class="year">
+          <p>2020</p>
         </div>
-        <!-- End sidebar begin navbar-->
-        <nav class='navigation'>
-            <div class='navigation-header'>
-                <h1 class='navigation-heading'>
-                    Journey Journal
-                </h1>
-                <button id='start-trip-btn'>
-                    Start New Trip
-                </button>
-            </div>
-            <h2 class='nav-subheading'>My Trips:</h2>
-            <ul class='navigation-list'>
-                <li class='navigation-item'>
-                    <a href='#' class='navigation-link'>
-                        Example Trip 1
-                    </a>
-                </li>
-                <li class='navigation-item'>
-                    <a href='#' class='navigation-link'>
-                        Example Trip 2
-                    </a>
-                </li>
-                <div class='copyright'>
-                    <p>&copy; 2020. Journey Journal. All Rights Reserved</p>
-                </div>
-            </ul>
-        </nav>
+      </div>
+      <!-- End sidebar begin navbar-->
+      <nav class="navigation">
+        <div class="navigation-header">
+          <h1 class="navigation-heading">
+            Journey Journal
+          </h1>
+          <!-- trigger modeal -->
+          <button id="start-trip-btn">
+            Start New Trip
+          </button>
+        </div>
+        <h2 class="nav-subheading">My Trips:</h2>
+        <ul class="navigation-list">
+          <li class="navigation-item">
+            <a href="#" class="navigation-link">
+              Example Trip 1
+            </a>
+          </li>
+          <li class="navigation-item">
+            <a href="#" class="navigation-link">
+              Example Trip 2
+            </a>
+          </li>
+          <div class="copyright">
+            <p>&copy; 2020. Journey Journal. All Rights Reserved</p>
+          </div>
+        </ul>
+      </nav>
     </header>
 
-    <!-- End Sidebar Begin Main -->
+    <!-- End Sidebar Begin Modal -->
+    <aside id="modal" class="modal">
+      <div class="modal-content">
+        <h2>Start Planning Your Trip</h2>
+        <span id="modal-close">&times;</span>
 
+        <!-- one "tab" for each step of the form -->
+        <div class="tab">
+          <h3>What's Your Destination?</h3>
+          <input
+            type="text"
+            data-key="location"
+            id="location-input"
+            class="modal-input"
+            placeholder="Enter A City"
+          />
+        </div>
+        <div class="tab">
+          <h3>When Are You Going?</h3>
+          <input
+            id="leave-input"
+            data-key="leaving"
+            type="date"
+            class="modal-input"
+            min="2020-01-01"
+          />
+          <p>until</p>
+          <input
+            id="return-input"
+            data-key="returning"
+            type="date"
+            class="modal-input"
+            min="2020-01-01"
+          />
+        </div>
+        <div class="tab">
+          <h3>Is There Anything Specific You're Going To See?</h3>
+          <input
+            type="text"
+            data-key="attractions"
+            class="modal-input"
+            id="attraction-input"
+          />
+        </div>
 
+        <div style="overflow: auto;">
+          <div style="float: right;">
+            <button
+              type="button"
+              id="prevBtn"
+              onclick="Travel.submitAnswer(-1)"
+            >
+              Previous
+            </button>
+            <button type="button" id="nextBtn" onclick="Travel.submitAnswer(1)">
+              Next
+            </button>
+          </div>
+        </div>
+        <!-- circles for form steps -->
+        <div style="text-align: center; margin-top: 40px;">
+          <span class="step"></span>
+          <span class="step"></span>
+          <span class="step"></span>
+        </div>
+      </div>
+    </aside>
+    <!-- End Modal -->
     <main>
-        <h1>Journey Journal</h1>
+      <h1>Journey Journal</h1>
     </main>
-</body>
+  </body>
 </html>
