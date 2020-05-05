@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-prod": "webpack --config webpack.prod.js",
+    "build-dev": "webpack-dev-server --config webpack.dev.js --open",
+    "start": "node src/server/index.js",
+    "dev": "nodemon src/server/index.js",
+    "run-all": "npm-run-all --parallel \"build-dev\" \"dev\""
   },
   "author": "",
   "license": "ISC",
