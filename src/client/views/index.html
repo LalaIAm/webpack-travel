@@ -62,9 +62,10 @@
         <span id="modal-close">&times;</span>
 
         <!-- one "tab" for each step of the form -->
-        <div class="tab">
+        <div class="tab" id="auth-tab">
           <h3>Login or SignUp</h3>
-          <label for="email">Enter Your Email</label>
+
+          <h4>Enter Your Email to Get Started</h4>
           <input
             type="email"
             data-key="email"
@@ -72,7 +73,8 @@
             class="modal-input"
             placeholder="your@email.com"
           />
-          <label for="password">Enter Your Password</label>
+
+          <h4>Enter Your Password</h4>
           <input
             type="password"
             data-key="password"
@@ -80,7 +82,25 @@
             class="modal-input"
             placeholder="Your Password"
           />
-          <button type="button" id="anonymous">Log In Anonymously</button>
+          <button id='login' type='button'>Log In</button>
+          <div class="anchor-box">
+            <p id="login-anon" class="links">Anonymous Login</p>
+            <p id="psw-forget" class="links">Forget Password?</p>
+          </div>
+        </div>
+        <div class="reset-tab" id="pwd-reset-tab">
+          <h3>What's Your Email?</h3>
+          <p>We'll send you a link to reset your password.</p>
+          <input
+            type="email"
+            id="pwd-reset-email"
+            password="Enter Your Email"
+          />
+          <button type="submit" id="send-reset">Submit</button>
+        </div>
+        <div class="success-tab">
+          <h3>Success!</h3>
+          <p>Check Your Email for a Reset Link</p>
         </div>
         <div class="tab">
           <h3>What's Your Destination?</h3>
@@ -120,7 +140,7 @@
           />
         </div>
 
-        <div style="overflow: auto;">
+        <div id="btn-box" style="overflow: auto;">
           <div style="float: right;">
             <button
               type="button"
