@@ -40,13 +40,15 @@ const showTab = (n) => {
 
 const submitAnswer = async (n) => {
     let x = document.getElementsByClassName('tab');
-    let inputs = document.querySelectorAll('modal-input');
+    let inputs = document.querySelectorAll('.modal-input');
 
     let currentInput = inputs[currentTab];
     let inputKey = currentInput.getAttribute('data-key');
     let inputValue = currentInput.value 
 
     inputData[inputKey] = inputValue
+
+    //if (n == 1 && !validateForm()) return false;
 
     x[currentTab].style.display = 'none';
 
@@ -57,20 +59,25 @@ const submitAnswer = async (n) => {
 
         console.log('input: ', inputData);
 
-        Travel.sendData(inputData);
+        Travel.sendData('http://localhost:3000/newtrip', inputData);
         
         return inputData;
     }
 
+    showTab(currentTab);
+
 }
+
 
 const fixStepIndicator = (n) => {
     let i, x = document.getElementsByClassName('step');
-    for (i = 0; i < x.length; i++){
-        x[i].className = x[i].className.replace(' active', '');
-    }
+    
+    x[n].setAttribute('class', 'step active');
 
-    x[n].className += 'active';
+    if (n - 1 >= 0) {
+        i = n - 1;
+        x[i].setAttribute('class', 'step')
+    }
 }
 
 showTab(currentTab);

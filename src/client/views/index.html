@@ -63,6 +63,26 @@
 
         <!-- one "tab" for each step of the form -->
         <div class="tab">
+          <h3>Login or SignUp</h3>
+          <label for="email">Enter Your Email</label>
+          <input
+            type="email"
+            data-key="email"
+            id="email-input"
+            class="modal-input"
+            placeholder="your@email.com"
+          />
+          <label for="password">Enter Your Password</label>
+          <input
+            type="password"
+            data-key="password"
+            id="password-input"
+            class="modal-input"
+            placeholder="Your Password"
+          />
+          <button type="button" id="anonymous">Log In Anonymously</button>
+        </div>
+        <div class="tab">
           <h3>What's Your Destination?</h3>
           <input
             type="text"
@@ -119,12 +139,18 @@
           <span class="step"></span>
           <span class="step"></span>
           <span class="step"></span>
+          <span class="step"></span>
         </div>
       </div>
     </aside>
     <!-- End Modal -->
     <main>
-      <h1>Journey Journal</h1>
+      <div class="header">
+        <h1 class="main-title">Journey Journal</h1>
+        <h2 id="trip-title" class="main-subtitle">
+          Where Are You Off To Next?
+        </h2>
+      </div>
     </main>
   </body>
 </html>

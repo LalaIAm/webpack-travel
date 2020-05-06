@@ -4,7 +4,10 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: './src/client/index.js',
+  entry: {
+    main: './src/client/index.js',
+    reset: './src/client/reset.js'
+  },
   mode: 'development',
   output: {
     libraryTarget: 'var',
@@ -38,6 +41,12 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: './src/client/views/index.html',
       filename: './index.html',
+      chunks: ['main']
+    }),
+    new HtmlWebPackPlugin({
+      filename: './reset.html',
+      template: './src/client/views/reset.html',
+      chunks: ['reset']
     }),
     new CleanWebpackPlugin({
       verbose: true,

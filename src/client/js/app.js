@@ -1,4 +1,4 @@
-const sendData = (data = {}) => {
+const sendData = (url = '', data = {}) => {
     let myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
 
@@ -11,8 +11,8 @@ const sendData = (data = {}) => {
         redirect: 'follow'
     };
 
-    fetch('http://localhost:3000/new', options)
-        .then((response) => response.json())
+    return fetch(url, options)
+        .then((response) => response.text())
         .then((result) => {
             console.log(result);
             return result;
