@@ -6,6 +6,6 @@ const stitch = Stitch.initializeDefaultAppClient(appId);
 
 const mongo = stitch.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas");
 
-const trips = mongo.db("travel").collection('trips')
+const trips = mongo.db("travels").collection('trips')
 
 module.exports = { trips, stitch }

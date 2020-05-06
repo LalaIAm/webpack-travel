@@ -13,9 +13,13 @@ let currentTab = 0;
 let inputData = {};
 
 anonLogin.onclick = () => {
-  Travel.sendData('/anon');
+  Travel.sendData('http://localhost:3000/anon');
   submitAnswer(1);
 };
+
+loginBtn.onclick = () => {
+  loginUser()
+}
 
 modalBtn.onclick = function () {
   modal.style.display = 'block';
@@ -78,15 +82,17 @@ const showTab = (n) => {
 
 const submitAnswer = async (n) => {
   let x = document.getElementsByClassName('tab');
-  let inputs = document.querySelectorAll('.modal-input');
+  let location = document.getElementById('location-input').value 
+  let leaving = document.getElementById('leaving-input').value
+  let returning = document.getElementById('returning-input').value
+  let attractions = document.getElementById('attraction-input').value
 
-  let currentInput = inputs[currentTab];
-  let inputKey = currentInput.getAttribute('data-key');
-  let inputValue = currentInput.value;
-
-  inputData[inputKey] = inputValue;
-
-  //if (n == 1 && !validateForm()) return false;
+  const inputData = {
+    location: location,
+    leaving: leaving,
+    returning: returning,
+    attractions: attractions
+  }
 
   x[currentTab].style.display = 'none';
 
@@ -119,4 +125,26 @@ const fixStepIndicator = (n) => {
 
 showTab(currentTab);
 
-export { submitAnswer, sendResetEmail };
+const loginUser = async () => {
+  let loginData = {}
+  const emailInput = document.getElementById('email-input')
+  const pwInput = document.getElementById('password-input');
+
+  loginData.email = emailInput;
+  loginData.password = pwInput
+
+
+  let userId = await Travel.sendData('http://localhost:3000/login', loginData);
+
+  if (userId) {
+    submitAnswer(1);
+  } else {
+    return 'user must be logged in'
+  }
+}
+
+const logoutUser = () => {
+  Travel.sendData('http://localhost:3000/logout')
+}
+
+export { submitAnswer, sendResetEmail, logoutUser, loginUser };

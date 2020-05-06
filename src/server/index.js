@@ -11,6 +11,7 @@ const {
   getCurrentUser,
   hasLoggedInUser,
   signUpUser,
+  loginEmailPassword,
 } = require('./auth');
 
 const PORT = process.env.PORT || 3000;
@@ -40,6 +41,7 @@ app.post('/add', callBack);
 const saveNewTrip = (req, res) => {
   const trip = req.body;
   const user = getCurrentUser();
+  trip.owner_id = user.id;
 
   if (user) {
     trips
@@ -82,7 +84,34 @@ const anonLogin = (req, res) => {
   }
 };
 
+const loginUser = async (req, res) => {
+  console.log(req.body, 'rew.');
+
+  const data = req.body;
+
+  let email = data.email;
+  let pw = data.password;
+
+  console.log('pw', pw);
+  console.log('email: ', email);
+
+  try {
+    const result = await loginEmailPassword(email, pw);
+    console.log(result);
+    res.send(result)
+  } catch (error) {
+    console.log('error logging in: ', error);
+  }
+};
+
+const logoutUser = (req, res) => {
+  logoutCurrentUser();
+  res.send('User Logged Out');
+};
+
 app.post('/newtrip', saveNewTrip);
 app.post('/pswreset', resetUserPassword);
 app.post('/sendreset', sendResetEmail);
 app.post('/anon', anonLogin);
+app.post('/login', loginUser);
+app.post('/logout', logoutUser);

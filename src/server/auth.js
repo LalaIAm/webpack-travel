@@ -1,39 +1,63 @@
-const { AnonymousCredential, UserPasswordCredential, UserPasswordAuthProviderClient } = require('mongodb-stitch-server-sdk');
+const {
+  AnonymousCredential,
+  UserPasswordCredential,
+  UserPasswordAuthProviderClient,
+} = require('mongodb-stitch-server-sdk');
 const { stitch } = require('./db');
 
-const authClient = stitch.auth.getProviderClient(UserPasswordAuthProviderClient.factory);
+const authClient = stitch.auth.getProviderClient(
+  UserPasswordAuthProviderClient.factory
+);
 
 const loginAnonymous = () => {
   const credential = new AnonymousCredential();
   return stitch.auth.loginWithCredential(credential);
 };
 
-const loginEmailPassword = (email, password) => {
+const loginEmailPassword = async (email, password) => {
   const credential = new UserPasswordCredential(email, password);
-  stitch.auth.loginWithCredential(credential)
-    .then(authedUser => console.log(`successfully logged in with id: `, authedUser.id))
-    .catch(err => console.log('login failed: ', err));
-}
+  const userList = stitch.auth.listUsers()
+  console.log('users: ', userList);
+  try {
+    const authedUser = await stitch.auth
+      .loginWithCredential(credential);
+    console.log(`successfully logged in with id: `, authedUser.id);
+    return authedUser.id;
+  }
+  catch (err) {
+    if (err.errorCode === 46) {
+      signUpUser(email, password);
+    }
+    else {
+      console.log('error signing in user: ', err);
+    }
+  }
+};
 
 const signUpUser = (email, password) => {
-  authClient.registerWithEmail(email, password)
+  authClient
+    .registerWithEmail(email, password)
     .then(() => console.log(`User registered`))
     .then(() => loginEmailPassword(email, password))
-    .catch(err => console.log('error creating new user: ', err));
-}
+    .catch((err) => console.log('error creating new user: ', err));
+};
 
 const sendPasswordResetEmail = (email) => {
-  authClient.sendResetPasswordEmail(email).then(() => {
-    console.log('Successfully sent reset email')
-    return 'success';
-  }).catch(err => console.log('error sending reset email: ', err));
-}
+  authClient
+    .sendResetPasswordEmail(email)
+    .then(() => {
+      console.log('Successfully sent reset email');
+      return 'success';
+    })
+    .catch((err) => console.log('error sending reset email: ', err));
+};
 
 const resetPassword = (token, tokenId, password) => {
-  authClient.resetPassword(token, tokenId, password)
+  authClient
+    .resetPassword(token, tokenId, password)
     .then(() => console.log('Successful Reset!'))
-    .catch(err => console.log('error reseting password', err));
-}
+    .catch((err) => console.log('error reseting password', err));
+};
 
 const hasLoggedInUser = () => {
   return stitch.auth.isLoggedIn;
@@ -56,5 +80,5 @@ module.exports = {
   resetPassword,
   sendPasswordResetEmail,
   loginEmailPassword,
-  signUpUser
+  signUpUser,
 };
