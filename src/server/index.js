@@ -109,9 +109,22 @@ const logoutUser = (req, res) => {
   res.send('User Logged Out');
 };
 
+const signupNewUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    let user = signUpUser(email, password);
+    console.log('signup: ', user)
+    res.send(user.id)
+  } catch (error) {
+    console.log('signup error: ', error);
+  }
+}
+
 app.post('/newtrip', saveNewTrip);
 app.post('/pswreset', resetUserPassword);
 app.post('/sendreset', sendResetEmail);
 app.post('/anon', anonLogin);
 app.post('/login', loginUser);
 app.post('/logout', logoutUser);
+app.post('/signup', signupNewUser);

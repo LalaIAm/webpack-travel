@@ -64,7 +64,7 @@
 
         <!-- one "tab" for each step of the form -->
         <div class="tab" id="auth-tab">
-          <h3>Login or SignUp</h3>
+          <h3>Login</h3>
 
           <h4>Enter Your Email to Get Started</h4>
           <input
@@ -81,10 +81,11 @@
             id="password-input"
             placeholder="Your Password"
           />
-          <button id='login' type='button' onclick='Travel.loginUser()'>Log In</button>
+          <button id='login' type='button' onclick='Travel.sendLoginData()'>Log In</button>
           <div class="anchor-box">
             <p id="login-anon" class="links">Anonymous Login</p>
             <p id="psw-forget" class="links">Forget Password?</p>
+            <p id='sign-up-link' class='links'>Don't Have an Account? Sign Up</p>
           </div>
         </div>
         <div class="reset-tab" id="pwd-reset-tab">
@@ -93,13 +94,21 @@
           <input
             type="email"
             id="pwd-reset-email"
-            password="Enter Your Email"
+            placeholder="Enter Your Email"
           />
           <button type="submit" id="send-reset">Submit</button>
         </div>
         <div class="success-tab">
           <h3>Success!</h3>
           <p>Check Your Email for a Reset Link</p>
+        </div>
+        <div class='signup-tab'>
+          <h3>Sign Up</h3>
+          <p>What's Your Email?</p>
+          <input type='email' id='singup-email' placeholder='Enter Your Email'>
+          <p>And a password</p>
+          <input type='password' id='signup-password' placeholder='Password'>
+          <button onclick='Travel.signupNewUser()' type='button' id='signup-btn'>Get Started!</button>
         </div>
         <div class="tab">
           <h3>What's Your Destination?</h3>

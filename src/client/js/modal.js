@@ -8,6 +8,8 @@ const btnBox = document.getElementById('btn-box');
 const anonLogin = document.getElementById('login-anon');
 const sendResetBtn = document.getElementById('send-reset');
 const loginBtn = document.getElementById('login');
+const signupLink = document.getElementById('sign-up-link')
+const signupTab = document.getElementById('signup-tab')
 
 let currentTab = 0;
 let inputData = {};
@@ -40,6 +42,12 @@ resetLink.onclick = function () {
   btnBox.style.display = 'none';
   resetTab.style.display = 'block';
 };
+
+signupLink.onclick = function () {
+  btnBox.style.display = 'none';
+  authTab.style.display = 'none';
+  signupTab.style.display = 'block';
+}
 
 const sendResetEmail = () => {
   const email = document.getElementById('pwd-reset-email').value;

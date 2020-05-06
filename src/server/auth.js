@@ -3,11 +3,15 @@ const {
   UserPasswordCredential,
   UserPasswordAuthProviderClient,
 } = require('mongodb-stitch-server-sdk');
-const { stitch } = require('./db');
+const { stitch, users } = require('./db');
 
 const authClient = stitch.auth.getProviderClient(
   UserPasswordAuthProviderClient.factory
 );
+
+const userList = () => {
+  return stitch.auth.listUsers()
+}
 
 const loginAnonymous = () => {
   const credential = new AnonymousCredential();

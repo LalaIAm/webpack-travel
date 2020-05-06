@@ -9,7 +9,9 @@
     "build-dev": "webpack-dev-server --config webpack.dev.js --open",
     "start": "node src/server/index.js",
     "dev": "nodemon src/server/index.js",
-    "start-all": "npm-run-all --parallel \"build-dev\" \"dev\""
+    "start-all": "npm-run-all --parallel \"build-dev\" \"dev\"",
+    "debug-server": "nodemon --inspect ./bin/www",
+    "debug": "npm-run-all --parallel \"build-dev\" \"debug-server\""
   },
   "author": "",
   "license": "ISC",

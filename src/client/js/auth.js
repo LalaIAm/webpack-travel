@@ -3,6 +3,7 @@ const loginBtn = document.getElementById('login');
 const email = document.getElementById('email-input')
 const password = document.getElementById('password-input');
 const logout = document.getElementById('logout-btn');
+const signupBtn = document.getElementById('signup-btn');
 
 const logoutUser = () => {
     Travel.sendData('http://localhost:3000/logout', {});
@@ -60,4 +61,23 @@ logout.onclick = () => {
     logoutUser()
 }
 
-export { getNewPassword, sendResetData, sendLoginData, logoutUser };
+const signupNewUser = async () => {
+    let userEmail = document.getElementById('signup-email').value 
+    let userPW = document.getElementById('signup-password').value 
+
+    let signupData = {
+        email: userEmail,
+        password: userPW
+    }
+
+    const user = await Travel.sendData('http://localhost:3000/signup', signupData);
+
+    console.log('signed up as: ', user.id);
+    return user;
+}
+
+signupBtn.onclick = () => {
+    signupNewUser()
+}
+
+export { getNewPassword, sendResetData, sendLoginData, logoutUser, signupNewUser };
